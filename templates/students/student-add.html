@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block title %}Maktab CRM - O'quvchi yaratish{% endblock %}
+
+{% block content %}
+    <h1>O'quvchi yaratish</h1>
+    <form id="createStudentForm" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="fullName">To'liq ism:</label>
+            <input type="text" id="fullName" name="full_name"  required>
+        </div>
+        <div class="form-group">
+            <label for="group">Guruh:</label>
+            <select id="group" name="group" >
+                <option value="">Guruhni tanlang</option>
+                {% for group in groups %}
+                    <option value="{{ group.id }}">{{ group.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="dob">Tug'ilgan sana:</label>
+            <input type="date" id="dob" name="date_of_birth" required>
+        </div>
+        <div class="form-group">
+            <label for="phone">Telefon:</label>
+            <input type="tel" id="phone" name="phone_number"  required>
+        </div>
+        <div class="form-group">
+            <label for="address">Manzil:</label>
+            <input type="text" id="address" name="address"  required>
+        </div>
+        <div class="form-group">
+            <label for="photo">Rasm:</label>
+            <input type="file" id="photo" name="photo" accept="image/*" required>
+        </div>
+        <div class="actions">
+            <button type="submit" class="btn"><i class="fas fa-save"></i> Saqlash</button>
+            <a href="{% url 'students:list' %}" class="btn btn-secondary"><i class="fas fa-times"></i> Bekor qilish</a>
+        </div>
+    </form>
+{% endblock %}
